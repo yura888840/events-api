@@ -1,11 +1,27 @@
+This project was written with the help of AI to speed up development
+
+this project allows to have recurrent reminder of events such as birthdays
+
 Endpoints :
 
-- POST /tasks — создать задачу.
-- GET /tasks — получить список.
-- PATCH /tasks/:id/complete — завершить задачу.
-- DELETE /tasks/:id — удалить задачу.
+- POST /events — create event.
+- GET /events — get events list.
+- PATCH /events/:id — update event.
+- DELETE /events/:id — delete event.
 
+Payload examples can be found in creat_event.sh, update_event.sh
 
+To run project :
+- run_db.sh
+This will create Database (Postgres ) container
+
+- apply migrations
+npx mikro-orm migration:up --config ./dist/mikro-orm.config.js
+
+- npm run build
+rebuild app
+
+-  npm run start:dev
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
