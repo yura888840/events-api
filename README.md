@@ -2,7 +2,7 @@ This project was written with the help of AI to speed up development
 
 This project allows to have recurrent reminder of events, such as birthdays
 
-Worker is responsible for sebding out notifications (reminders )
+Worker is responsible for sending out notifications (reminders )
 
 Endpoints :
 
