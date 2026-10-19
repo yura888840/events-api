@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { createObserveModule } from '@nestjs/observe';
 import { InMemoryEventRepository } from './application/infrastructure/repository/in-memory-event-repository.js';
 import { EVENT_REPOSITORY } from './events.tokens.js';
 import { GetAllEventsUseCase } from './application/usecases/get-all-events.use-case.js';
@@ -10,23 +9,8 @@ import { DeleteEventUseCase } from './application/usecases/delete-event.use-case
 import { EventRepository } from './application/port/repository/events_repository.js';
 import { EventsController } from './controller/events.controller.js';
 import { MikroOrmEventRepository } from './application/infrastructure/persistence/event.repository.js';
-import { MikroOrmModule } from '@mikro-orm/nestjs';
-import mikroOrmConfig from '../../config/mikro-orm.config.js';
-
-export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
 @Module({
-  imports: [
-    // Distributed tracing, auto-correlated logs, request/job metrics, error
-    // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
-    ObserveModule.forRoot({
-      appKey: 'YOUR_APP_KEY',
-      appSecret: 'YOUR_APP_SECRET',
-      serviceId: 'task-api',
-    }),
-    EventsModule,
-    MikroOrmModule.forRoot(mikroOrmConfig),
-  ],
   controllers: [EventsController],
   providers: [
     {
