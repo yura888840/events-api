@@ -13,7 +13,17 @@ Endpoints :
 
 Payload examples can be found in creat_event.sh, update_event.sh
 
-To run HTTP server following steps :
+## General requirements before run project 
+docker compose up -d redis postgres
+npn run build
+npx mikro-orm migration:up  --config ./dist/config/mikro-orm.config.js
+
+To check that everything is fine :
+
+docker compose exec postgres psql -U reminders -d reminders \
+  -c "SELECT * FROM event_reminders;"
+
+## To run HTTP server following steps :
 - run_db.sh
 This will create Database (Postgres ) container
 
@@ -24,10 +34,17 @@ npx mikro-orm migration:up --config ./dist/mikro-orm.config.js
 rebuild app
 
 
-Start worker :
+## Start worker
 
 - npm run build
 - node dist/worker.js
+
+
+## To create migration from existing entities
+npx mikro-orm migration:create --config ./dist/config/mikro-orm.config.js
+
+npx mikro-orm migration:up  --config ./dist/config/mikro-orm.config.js
+
 
 -  npm run start:dev
 <p align="center">
