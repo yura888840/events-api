@@ -1,6 +1,8 @@
 This project was written with the help of AI to speed up development
 
-this project allows to have recurrent reminder of events such as birthdays
+This project allows to have recurrent reminder of events, such as birthdays
+
+Worker is responsible for sebding out notifications (reminders )
 
 Endpoints :
 
@@ -11,7 +13,7 @@ Endpoints :
 
 Payload examples can be found in creat_event.sh, update_event.sh
 
-To run project :
+To run HTTP server following steps :
 - run_db.sh
 This will create Database (Postgres ) container
 
@@ -20,6 +22,12 @@ npx mikro-orm migration:up --config ./dist/mikro-orm.config.js
 
 - npm run build
 rebuild app
+
+
+Start worker :
+
+- npm run build
+- node dist/worker.js
 
 -  npm run start:dev
 <p align="center">
