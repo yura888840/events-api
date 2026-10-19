@@ -1,6 +1,6 @@
 This project was written with the help of AI to speed up development
 
-This project allows to have recurrent reminder of events, such as birthdays
+Allows to have recurrent reminder of events, such as birthdays. For now it sends to Telegram bot
 
 Worker is responsible for sending out notifications (reminders )
 
