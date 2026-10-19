@@ -1,4 +1,4 @@
-This project was written with the help of AI to speed up development
+# This project was written with the help of AI to speed up development
 
 Allows to have recurrent reminder of events, such as birthdays. For now it sends to Telegram bot
 
