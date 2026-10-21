@@ -11,7 +11,9 @@ Endpoints :
 - PATCH /events/:id — update event.
 - DELETE /events/:id — delete event.
 
-Payload examples can be found in creat_event.sh, update_event.sh
+Payload examples can be found in create_event.sh, update_event.sh
+
+Postman collection for working with endpoints provided here : events-api.postman_collection.json
 
 ## General requirements before run project 
 docker compose up -d redis postgres

@@ -1,0 +1,146 @@
+{
+  "info": {
+    "name": "Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Event CRUD API without authentication. Start the API and check baseUrl in the collection Variables. After creating an event, run GET /events and copy the desired id into eventId. POST returns an empty response. DELETE removes the selected event."
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "eventId",
+      "value": "",
+      "type": "string",
+      "description": "ID of an existing event from GET /events."
+    }
+  ],
+  "item": [
+    {
+      "name": "Create event",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "events"
+          ]
+        },
+        "description": "Create an event. The server generates the ID. Expected response: 201 with no body. The year field is optional for birthdays.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Birthday\",\n  \"description\": \"Buy a present\",\n  \"year\": 1990,\n  \"month\": 7,\n  \"day\": 4,\n  \"type\": \"birthday\",\n  \"recurrence\": \"yearly\",\n  \"isActive\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get all events",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "events"
+          ]
+        },
+        "description": "Expected response: 200 with an array of events. Copy the desired id into eventId."
+      },
+      "response": []
+    },
+    {
+      "name": "Get event by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/events/{{eventId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "events",
+            "{{eventId}}"
+          ]
+        },
+        "description": "Set eventId in the collection Variables. Expected response: 200 if found, 404 if missing."
+      },
+      "response": []
+    },
+    {
+      "name": "Partially update event",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/events/{{eventId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "events",
+            "{{eventId}}"
+          ]
+        },
+        "description": "Set eventId. Send only the fields to update. Expected response: 204 with no body.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"description\": \"The present has already been purchased\",\n  \"isActive\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete event",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/events/{{eventId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "events",
+            "{{eventId}}"
+          ]
+        },
+        "description": "Set eventId. This request deletes the selected event."
+      },
+      "response": []
+    }
+  ]
+}
