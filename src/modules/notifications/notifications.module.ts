@@ -12,8 +12,8 @@ import { TelegramService } from './telegram.service.js';
   imports: [
     BullModule.forRoot({
       connection: {
-        host: '127.0.0.1',
-        port: 6379,
+        host: process.env.BULL_HOST ?? '127.0.0.1',
+        port: Number(process.env.BULL_PORT ?? 6379),
       },
     }),
     BullModule.registerQueue({
