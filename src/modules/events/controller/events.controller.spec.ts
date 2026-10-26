@@ -286,7 +286,9 @@ describe('EventsController', () => {
     const id = 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11';
 
     try {
-      await expect(controller.update(id, { name: ' Anniversary ' })).resolves.toBeUndefined();
+      await expect(
+        controller.update(id, { name: ' Anniversary ' }),
+      ).resolves.toBeUndefined();
       expect(update).toHaveBeenCalledExactlyOnceWith({
         id,
         changes: { name: 'Anniversary' },
@@ -316,7 +318,9 @@ describe('EventsController', () => {
 
     try {
       await expect(
-        controller.update('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', { name: 'Anniversary' }),
+        controller.update('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', {
+          name: 'Anniversary',
+        }),
       ).rejects.toBeInstanceOf(NotFoundException);
     } finally {
       await close();
@@ -329,7 +333,9 @@ describe('EventsController', () => {
 
     try {
       await expect(
-        controller.update('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', { name: 'Anniversary' }),
+        controller.update('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', {
+          name: 'Anniversary',
+        }),
       ).rejects.toBeInstanceOf(InternalServerErrorException);
     } finally {
       await close();
