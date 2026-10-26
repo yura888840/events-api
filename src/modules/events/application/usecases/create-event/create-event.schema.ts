@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { CreateEventRequest } from './create-event.request.js';
+import type { CreateEventRequest } from './create-event.use-case.js';
 
 export const createEventBodySchema = z.object({
   name: z.string().trim().min(1),

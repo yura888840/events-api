@@ -104,6 +104,7 @@ export class EventsController {
       await this.deleteEventUseCase.execute(id);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
+      
       throw new InternalServerErrorException(
         format('Something went wrong during deletion %s', message),
       );
