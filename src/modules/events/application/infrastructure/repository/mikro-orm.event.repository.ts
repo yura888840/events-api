@@ -1,9 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { EntityManager } from '@mikro-orm/postgresql';
-
 import type { Event } from '../../models/event.js';
 import type { EventRepository } from '../../port/repository/events_repository.js';
-import { EventEntity } from './event.entity.js';
+import { Entity, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
+
+@Entity({ tableName: 'events' })
+export class EventEntity {
+  @PrimaryKey({ type: 'uuid' })
+  id!: string;
+
+  @Property({ type: 'string' })
+  name!: string;
+
+  @Property({ type: 'text' })
+  description!: string;
+
+  @Property({ type: 'integer', nullable: true })
+  year: number | null = null;
+
+  @Property({ type: 'integer' })
+  month!: number;
+
+  @Property({ type: 'integer' })
+  day!: number;
+
+  @Property({ type: 'string' })
+  type!: 'birthday' | 'other';
+
+  @Property({ type: 'string' })
+  recurrence!: 'yearly' | 'none';
+
+  @Property({ type: 'boolean' })
+  isActive!: boolean;
+}
 
 @Injectable()
 export class MikroOrmEventRepository implements EventRepository {
