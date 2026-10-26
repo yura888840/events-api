@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bullmq';
 import { NotificationsProcessor } from './notifications.processor.js';
 import { NotificationsService } from './notifications.service.js';
-import { MikroOrmEventRepository } from '../events/application/infrastructure/persistence/event.repository.js';
+import { MikroOrmEventRepository } from '../events/application/infrastructure/repository/mikro-orm.event.repository.js';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import mikroOrmConfig from '../../config/mikro-orm.config.js';
 import { EventReminderRepository } from './repository/event-reminder.repository.js';

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { InMemoryEventRepository } from './application/infrastructure/repository/in-memory-event-repository.js';
+import { InMemoryEventRepository } from './application/infrastructure/repository/in-memory.event-repository.js';
 import { EVENT_REPOSITORY } from './events.tokens.js';
 import { GetAllEventsUseCase } from './application/usecases/get-all-events.use-case.js';
 import { GetOneByIdUseCase } from './application/usecases/get-one-by-id.use-case.js';
@@ -8,7 +8,7 @@ import { UpdateEventUseCase } from './application/usecases/update-event/update-e
 import { DeleteEventUseCase } from './application/usecases/delete-event.use-case.js';
 import { EventRepository } from './application/port/repository/events_repository.js';
 import { EventsController } from './controller/events.controller.js';
-import { MikroOrmEventRepository } from './application/infrastructure/persistence/event.repository.js';
+import { MikroOrmEventRepository } from './application/infrastructure/repository/mikro-orm.event.repository.js';
 
 @Module({
   controllers: [EventsController],

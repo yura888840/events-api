@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MikroOrmEventRepository } from '../events/application/infrastructure/persistence/event.repository.js';
+import { MikroOrmEventRepository } from '../events/application/infrastructure/repository/mikro-orm.event.repository.js';
 import { EventReminderRepository } from './repository/event-reminder.repository.js';
 import { TelegramService } from './telegram.service.js';
 
