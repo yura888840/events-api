@@ -2,7 +2,7 @@ import { defineConfig } from '@mikro-orm/postgresql';
 import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
 import { Migrator } from '@mikro-orm/migrations';
 
-import { EventEntity } from '../modules/events/application/infrastructure/repository/event.entity.js';
+import { EventEntity } from '../modules/events/application/infrastructure/repository/mikro-orm.event.repository.js';
 import { EventReminderEntity } from '../modules/notifications/repository/event-reminder.repository.js';
 
 export default defineConfig({
