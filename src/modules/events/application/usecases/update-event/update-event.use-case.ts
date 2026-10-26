@@ -1,7 +1,12 @@
 import { NotFoundError } from 'rxjs';
 import { Event } from '../../models/event.js';
 import type { EventRepository } from '../../port/repository/events_repository.js';
-import { UpdateEventRequest } from './update-event.request.js';
+import type { CreateEventRequest } from '../create-event/create-event.request.js';
+
+export interface UpdateEventRequest {
+  id: string;
+  changes: Partial<CreateEventRequest>;
+}
 
 export class UpdateEventUseCase {
   constructor(private readonly eventRepository: EventRepository) {}
