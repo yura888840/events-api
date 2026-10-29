@@ -8,7 +8,7 @@ import type { Event } from '../../models/event.js';
 import type { EventRepository } from '../../port/repository/events_repository.js';
 
 describe('UpdateEventUseCase', () => {
-  it('updates existing event with provided changes and keeps id unchanged', async () => {
+  it('updates existing event with provided changes', async () => {
     const existingEvent: Event = {
       id: 'event-1',
       name: 'Birthday',
