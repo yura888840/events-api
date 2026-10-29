@@ -51,7 +51,6 @@ async function createController({
 
 describe('EventsController', () => {
   it('returns events provided by the use case for list of all events', async () => {
-    // Arrange: подготавливаем данные и зависимости
     const events: Event[] = [
       {
         id: 'event-1',
@@ -162,7 +161,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('Return event when id exists', async () => {
+  it('Happy path - get one event endpoint. Return event when id exists', async () => {
     const useCaseMock = {
       execute: vi.fn(),
     };
@@ -222,7 +221,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('creates a validated event with schema defaults', async () => {
+  it('POST events endpoint. Creates a validated event with schema defaults', async () => {
     const create = vi.fn().mockResolvedValue(event);
     const { controller, close } = await createController({ create });
 
@@ -251,7 +250,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('rejects invalid create input without calling the use case', async () => {
+  it('POST events endpoint. rejects invalid create input without calling the use case', async () => {
     const create = vi.fn();
     const { controller, close } = await createController({ create });
 
@@ -265,7 +264,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('maps create use-case failures to InternalServerErrorException', async () => {
+  it('POST events endpoint. maps create use-case failures to InternalServerErrorException', async () => {
     const create = vi.fn().mockRejectedValue(new Error('database unavailable'));
     const { controller, close } = await createController({ create });
 
@@ -280,7 +279,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('updates a valid event and passes normalized request to the use case', async () => {
+  it('PATCH events endpoint. updates a valid event and passes normalized request to the use case', async () => {
     const update = vi.fn().mockResolvedValue(undefined);
     const { controller, close } = await createController({ update });
     const id = 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11';
@@ -298,7 +297,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('rejects invalid update input without calling the use case', async () => {
+  it('PATCH events endpoint. rejects invalid update input without calling the use case', async () => {
     const update = vi.fn();
     const { controller, close } = await createController({ update });
 
@@ -312,7 +311,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('maps missing events during update to NotFoundException', async () => {
+  it('PATCH events endpoint.maps missing events during update to NotFoundException', async () => {
     const update = vi.fn().mockRejectedValue(new NotFoundError('missing'));
     const { controller, close } = await createController({ update });
 
@@ -327,7 +326,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('maps unexpected update failures to InternalServerErrorException', async () => {
+  it('PATCH events endpoint. maps unexpected update failures to InternalServerErrorException', async () => {
     const update = vi.fn().mockRejectedValue(new Error('database unavailable'));
     const { controller, close } = await createController({ update });
 
@@ -342,7 +341,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('deletes an event by id', async () => {
+  it('DELETE events endpoint. deletes an event by id', async () => {
     const remove = vi.fn().mockResolvedValue(undefined);
     const { controller, close } = await createController({ remove });
 
@@ -354,7 +353,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('includes delete failures in the internal-server error response', async () => {
+  it('DELETE events endpoint. includes delete failures in the internal-server error response', async () => {
     const remove = vi.fn().mockRejectedValue(new Error('database unavailable'));
     const { controller, close } = await createController({ remove });
 
@@ -369,7 +368,7 @@ describe('EventsController', () => {
     }
   });
 
-  it('stringifies non-Error delete failures in the internal-server error response', async () => {
+  it('DELETE events endpoint. stringifies non-Error delete failures in the internal-server error response', async () => {
     const remove = vi.fn().mockRejectedValue('boom');
     const { controller, close } = await createController({ remove });
 
