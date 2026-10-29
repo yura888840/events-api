@@ -68,7 +68,6 @@ describe('UpdateEventUseCase', () => {
     };
 
     const useCase = new UpdateEventUseCase(repository);
-
     const execution = useCase.execute({
       id: 'missing-id',
       changes: { name: 'Updated' },
@@ -78,6 +77,7 @@ describe('UpdateEventUseCase', () => {
     await expect(execution).rejects.toThrow(
       'Event with id "missing-id" not found',
     );
+    
     expect(getById).toHaveBeenCalledOnce();
     expect(getById).toHaveBeenCalledWith('missing-id');
     expect(update).not.toHaveBeenCalled();
