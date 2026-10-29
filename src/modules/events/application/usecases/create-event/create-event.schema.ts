@@ -4,7 +4,7 @@ import type { CreateEventRequest } from './create-event.use-case.js';
 export const createEventBodySchema = z.object({
   name: z.string().trim().min(1),
   description: z.string().default(''),
-  year: z.number().int().min(1).max(9999).optional(),
+  year: z.number().int().min(1900).max(2040).optional(),
   month: z.number().int().min(1).max(12),
   day: z.number().int().min(1).max(31),
   type: z.enum(['birthday', 'other']),
