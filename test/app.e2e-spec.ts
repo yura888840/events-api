@@ -19,7 +19,8 @@ describe('AppController (e2e)', () => {
   it('/events (GET)', () => {
     return request(app.getHttpServer())
       .get('/events')
-      .expect(200)
+      .set('Authorization', 'Bearer test-token')
+      .expect(200);
   });
 
   afterEach(async () => {
