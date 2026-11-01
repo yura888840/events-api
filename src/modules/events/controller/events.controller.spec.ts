@@ -13,6 +13,20 @@ import { CreateEventUseCase } from '../application/usecases/create-event/create-
 import { UpdateEventUseCase } from '../application/usecases/update-event/update-event.use-case.js';
 import { DeleteEventUseCase } from '../application/usecases/delete-event.use-case.js';
 import { NotFoundError } from 'rxjs';
+import { AuthorizationGuard } from '../../auth/authorization.guard.js';
+import { AuthorizationService } from '../../auth/application/authorization.service.js';
+
+const authorizationServiceMock = {
+  checkAccess: vi.fn().mockResolvedValue({
+    isAllowed: true,
+    userProfile: {
+      id: 'user-1',
+      name: 'Mock User',
+      roles: ['user'],
+      allowedResources: ['*'],
+    },
+  }),
+};
 
 const event: Event = {
   id: 'event-1',
@@ -40,6 +54,8 @@ async function createController({
       { provide: CreateEventUseCase, useValue: { execute: create } },
       { provide: UpdateEventUseCase, useValue: { execute: update } },
       { provide: DeleteEventUseCase, useValue: { execute: remove } },
+      { provide: AuthorizationGuard, useValue: { canActivate: vi.fn() } },
+      { provide: AuthorizationService, useValue: authorizationServiceMock },
     ],
   }).compile();
 
@@ -95,6 +111,14 @@ describe('EventsController', () => {
           provide: DeleteEventUseCase,
           useValue: useCaseMock,
         },
+        {
+          provide: AuthorizationGuard,
+          useValue: { canActivate: vi.fn() },
+        },
+        {
+          provide: AuthorizationService,
+          useValue: authorizationServiceMock,
+        },
       ],
     }).compile();
 
@@ -141,6 +165,14 @@ describe('EventsController', () => {
         {
           provide: DeleteEventUseCase,
           useValue: useCaseMock,
+        },
+        {
+          provide: AuthorizationGuard,
+          useValue: { canActivate: vi.fn() },
+        },
+        {
+          provide: AuthorizationService,
+          useValue: authorizationServiceMock,
         },
       ],
     }).compile();
@@ -203,6 +235,14 @@ describe('EventsController', () => {
         {
           provide: DeleteEventUseCase,
           useValue: useCaseMock,
+        },
+        {
+          provide: AuthorizationGuard,
+          useValue: { canActivate: vi.fn() },
+        },
+        {
+          provide: AuthorizationService,
+          useValue: authorizationServiceMock,
         },
       ],
     }).compile();

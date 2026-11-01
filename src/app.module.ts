@@ -3,6 +3,7 @@ import { EventsModule } from './modules/events/events.module.js';
 import { createObserveModule } from '@nestjs/observe';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import mikroOrmConfig from './config/mikro-orm.config.js';
+import { AuthModule } from './modules/auth/auth.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -16,6 +17,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       serviceId: 'task-api',
     }),
     MikroOrmModule.forRoot(mikroOrmConfig),
+    AuthModule,
     EventsModule,
   ],
 })

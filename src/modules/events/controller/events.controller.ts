@@ -1,4 +1,5 @@
 import {
+  UseGuards,
   Controller,
   Delete,
   Get,
@@ -12,6 +13,8 @@ import {
   BadRequestException,
   InternalServerErrorException,
 } from '@nestjs/common';
+import { AuthorizationGuard } from '../../auth/authorization.guard.js';
+import { AccessResource } from '../../auth/decorators/access-resource.decorator.js';
 import type { Event } from '../application/models/event.js';
 import { GetAllEventsUseCase } from '../application/usecases/get-all-events.use-case.js';
 import { GetOneByIdUseCase } from '../application/usecases/get-one-by-id.use-case.js';
@@ -22,11 +25,17 @@ import { UpdateEventUseCase } from '../application/usecases/update-event/update-
 import { updateEventRequestSchema } from '../application/usecases/update-event/update-event.schema.js';
 import { NotFoundError } from 'rxjs';
 import { format } from 'node:util';
+import type { CreateEventRequest } from '../application/usecases/create-event/create-event.use-case.js';
 
-type CreateEventInput = Omit<Event, 'id'>;
+type CreateEventInput = Omit<CreateEventRequest, 'description' | 'isActive'> & {
+  description?: string;
+  isActive?: boolean;
+};
 type UpdateEventInput = Partial<CreateEventInput>;
 
 @Controller('events')
+@UseGuards(AuthorizationGuard)
+@AccessResource('events')
 export class EventsController {
   constructor(
     private readonly getAllEventsUseCase: GetAllEventsUseCase,

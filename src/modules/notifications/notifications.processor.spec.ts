@@ -14,7 +14,9 @@ describe('NotificationsProcessor', () => {
     const em = {};
     const orm = { em } as MikroORM;
     const checkEvents = vi.fn().mockResolvedValue(undefined);
-    const notificationsService = { checkEvents } as NotificationsService;
+    const notificationsService = {
+      checkEvents,
+    } as unknown as NotificationsService;
 
     const createSpy = vi
       .spyOn(RequestContext, 'create')
@@ -34,7 +36,7 @@ describe('NotificationsProcessor', () => {
     const orm = { em: {} } as MikroORM;
     const notificationsService = {
       checkEvents: vi.fn(),
-    } as NotificationsService;
+    } as unknown as NotificationsService;
 
     const createSpy = vi.spyOn(RequestContext, 'create');
     const processor = new NotificationsProcessor(orm, notificationsService);

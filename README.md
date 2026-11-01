@@ -11,6 +11,11 @@ Endpoints :
 - PATCH /events/:id — update event.
 - DELETE /events/:id — delete event.
 
+All `/events` endpoints require `Authorization: Bearer <token>` header.
+
+Auth module currently uses a mocked auth-service client that always returns the
+same hardcoded user profile and grants access to all resources (`allowedResources: ['*']`).
+
 Payload examples can be found in create_event.sh, update_event.sh
 
 Postman collection for working with endpoints provided here : events-api.postman_collection.json
